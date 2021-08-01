@@ -25,6 +25,10 @@ public @Data class Modul {
 
     @OneToMany(mappedBy="modul")
     @JsonManagedReference
+    private Set<Contingut> continguts = new HashSet<>();
+
+    @OneToMany(mappedBy="modul")
+    @JsonManagedReference
     private Set<ResultatAprenentatgeCicle> resultatAprenentatgeCicle = new HashSet<>();
 
     @OneToMany(mappedBy="modul")

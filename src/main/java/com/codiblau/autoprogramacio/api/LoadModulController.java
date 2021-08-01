@@ -1,13 +1,7 @@
 package com.codiblau.autoprogramacio.api;
 
-import com.codiblau.autoprogramacio.manager.CompetenciaProfessionalService;
-import com.codiblau.autoprogramacio.manager.ContingutService;
-import com.codiblau.autoprogramacio.manager.ModulService;
-import com.codiblau.autoprogramacio.manager.ResultatAprenentatgeCicleService;
-import com.codiblau.autoprogramacio.model.CompetenciaProfessional;
-import com.codiblau.autoprogramacio.model.Contingut;
-import com.codiblau.autoprogramacio.model.Modul;
-import com.codiblau.autoprogramacio.model.ResultatAprenentatgeCicle;
+import com.codiblau.autoprogramacio.manager.*;
+import com.codiblau.autoprogramacio.model.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -33,6 +27,9 @@ public class LoadModulController {
     @Autowired
     ContingutService contingutService;
 
+    @Autowired
+    CriteriAvaluacioService criteriAvaluacioService;
+
 
     @GetMapping("/load/misox")
     public ResponseEntity loadSistemesOperatiusMonoestacio(HttpServletRequest request){
@@ -44,6 +41,7 @@ public class LoadModulController {
         this.loadCompetenciesCFGMInformatica(m2);
         this.loadResultatsAprenentatgeCicleMISOX(m2);
         this.loadContinguts(m2);
+        this.loadCriterisAvaluacio(m2);
 
         return new ResponseEntity<>(m.getNom()+" carregat amb èxit", HttpStatus.OK);
     }
@@ -112,15 +110,26 @@ public class LoadModulController {
     }
 
     private void loadContinguts(Modul m){
-        ResultatAprenentatgeCicle r1 = resultatAprenentatgeCicleService.findByOrdreAndModul(1,m);
         Contingut c = new Contingut();
         c.setNomES("Caracterización de sistemas operativos");
         c.setNomCA("");
         c.setBasic(true);
         c.setExcepcio(false);
         c.setOrdre(1);
-        c.setResultatAprenentatgeCicle(r1);
+        c.setModul(m);
 
         contingutService.save(c);
+    }
+
+    private void loadCriterisAvaluacio(Modul m){
+        ResultatAprenentatgeCicle r1 = resultatAprenentatgeCicleService.findByOrdreAndModul(1,m);
+        CriteriAvaluacio ca = new CriteriAvaluacio();
+        ca.setOrdre(1);
+        ca.setNomES("hol");
+        ca.setNomCA("");
+        ca.setExcepcio(false);
+        ca.setResultatAprenentatgeCicle(r1);
+
+        criteriAvaluacioService.save(ca);
     }
 }

@@ -31,8 +31,9 @@ public @Data class Contingut {
 
     @ManyToOne
     @JoinColumn(
-            name="resultataprenentatge_idresultataprenentatge",
+            name="modul_idmodul",
             nullable = false)
     @JsonBackReference
-    private ResultatAprenentatgeCicle resultatAprenentatgeCicle;
+    private Modul modul;
+
 }

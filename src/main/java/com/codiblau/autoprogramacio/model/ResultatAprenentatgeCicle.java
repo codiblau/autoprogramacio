@@ -39,8 +39,7 @@ public @Data class ResultatAprenentatgeCicle {
     @ManyToMany
     private Set<CompetenciaProfessional> competencies = new HashSet<>();
 
-    @OneToMany(mappedBy="resultatAprenentatgeCicle")
-    @JsonManagedReference
+    @ManyToMany
     private Set<Contingut> continguts = new HashSet<>();
 
     @OneToMany(mappedBy="resultatAprenentatgeCicle")

@@ -22,6 +22,9 @@ public @Data class CriteriAvaluacio {
     @Column(name = "ordre", nullable = false)
     private Integer ordre;
 
+    @Column(name = "excepcio", nullable = false)
+    private Boolean excepcio;
+
     @ManyToOne
     @JoinColumn(
             name="resultataprenentatge_idresultataprenentatge",
