@@ -3,6 +3,7 @@ package com.codiblau.autoprogramacio.model;
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import lombok.Data;
+import org.hibernate.annotations.Type;
 
 import javax.persistence.*;
 import java.util.HashSet;
@@ -20,6 +21,7 @@ public @Data class UnitatFormativa {
     private String nom;
 
     @Column(name = "justificacio", nullable = true)
+    @Type(type="text")
     private String justificacio;
 
     @Column(name = "ordre", nullable = false)

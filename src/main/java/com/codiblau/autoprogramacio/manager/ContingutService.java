@@ -1,21 +1,20 @@
 package com.codiblau.autoprogramacio.manager;
 
+import com.codiblau.autoprogramacio.model.Contingut;
 import com.codiblau.autoprogramacio.model.Modul;
+import com.codiblau.autoprogramacio.repository.ContingutRepository;
 import com.codiblau.autoprogramacio.repository.ModulRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.Optional;
-
 @Service
-public class ModulService {
+public class ContingutService {
     @Autowired
-    ModulRepository modulRepository;
+    ContingutRepository contingutRepository;
 
-    public Modul save(Modul m){
-        return modulRepository.save(m);
+    public void save(Contingut c){
+        contingutRepository.save(c);
     }
-
 
 }
 

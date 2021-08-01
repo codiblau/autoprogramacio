@@ -14,10 +14,10 @@ public @Data class Contingut {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long idcontingut;
 
-    @Column(name = "nom_es", nullable = false)
+    @Column(name = "nom_es", nullable = false, length = 2048)
     private String nomES;
 
-    @Column(name = "nom_ca", nullable = false)
+    @Column(name = "nom_ca", nullable = false, length = 2048)
     private String nomCA;
 
     @Column(name = "ordre", nullable = false)

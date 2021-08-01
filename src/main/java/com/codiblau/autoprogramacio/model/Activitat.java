@@ -15,7 +15,7 @@ public @Data class Activitat {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long idActivitat;
 
-    @Column(name = "nom", nullable = false)
+    @Column(name = "nom", nullable = false, length = 2048)
     private String nom;
 
     @Column(name = "ordre", nullable = false)

@@ -1,9 +1,11 @@
 package com.codiblau.autoprogramacio.api;
 
 import com.codiblau.autoprogramacio.manager.CompetenciaProfessionalService;
+import com.codiblau.autoprogramacio.manager.ContingutService;
 import com.codiblau.autoprogramacio.manager.ModulService;
 import com.codiblau.autoprogramacio.manager.ResultatAprenentatgeCicleService;
 import com.codiblau.autoprogramacio.model.CompetenciaProfessional;
+import com.codiblau.autoprogramacio.model.Contingut;
 import com.codiblau.autoprogramacio.model.Modul;
 import com.codiblau.autoprogramacio.model.ResultatAprenentatgeCicle;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -28,15 +30,20 @@ public class LoadModulController {
     @Autowired
     ResultatAprenentatgeCicleService resultatAprenentatgeCicleService;
 
+    @Autowired
+    ContingutService contingutService;
+
 
     @GetMapping("/load/misox")
     public ResponseEntity loadSistemesOperatiusMonoestacio(HttpServletRequest request){
         Modul m = new Modul();
         m.setNom("Sistemes Operatius Monoestació");
-        modulService.save(m);
+        //Retornem m2 per tenir la id del mòdul per Hibernate
+        Modul m2 = modulService.save(m);
 
-        this.loadCompetenciesCFGMInformatica(m);
-
+        this.loadCompetenciesCFGMInformatica(m2);
+        this.loadResultatsAprenentatgeCicleMISOX(m2);
+        this.loadContinguts(m2);
 
         return new ResponseEntity<>(m.getNom()+" carregat amb èxit", HttpStatus.OK);
     }
@@ -82,12 +89,38 @@ public class LoadModulController {
     }
 
     private void loadResultatsAprenentatgeCicleMISOX(Modul m){
+        System.out.println("Modul de resultat es"+m.getIdmodul());
         List<String> ra = new ArrayList<>();
         ra.add("1. Reconoce las características de los sistemas de archivo, describiendo sus tipos y aplicaciones.");
         ra.add("2. Instala sistemas operativos, relacionando sus características con el hardware del equipo y el software de aplicación.");
         ra.add("3. Realiza tareas básicas de configuración de sistemas operativos, interpretando requerimientos y describiendo los procedimientos seguidos.");
         ra.add("4. Realiza operaciones básicas de administración de sistemas operativos, interpretando requerimientos y optimizando el sistema para su uso.");
         ra.add("5. Crea máquinas virtuales identificando su campo de aplicación e instalando software específico.");
+
+        Integer index = 1;
+        for(String s: ra){
+            ResultatAprenentatgeCicle r = new ResultatAprenentatgeCicle();
+            r.setNomES(s);
+            r.setNomCA("");
+            r.setOrdre(index);
+            r.setModul(m);
+
+            resultatAprenentatgeCicleService.save(r);
+
+            index++;
+        }
     }
 
+    private void loadContinguts(Modul m){
+        ResultatAprenentatgeCicle r1 = resultatAprenentatgeCicleService.findByOrdreAndModul(1,m);
+        Contingut c = new Contingut();
+        c.setNomES("Caracterización de sistemas operativos");
+        c.setNomCA("");
+        c.setBasic(true);
+        c.setExcepcio(false);
+        c.setOrdre(1);
+        c.setResultatAprenentatgeCicle(r1);
+
+        contingutService.save(c);
+    }
 }

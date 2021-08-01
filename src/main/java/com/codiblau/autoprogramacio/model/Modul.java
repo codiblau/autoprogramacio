@@ -16,7 +16,7 @@ public @Data class Modul {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long idmodul;
 
-    @Column(name = "nom", nullable = false)
+    @Column(name = "nom", nullable = false, length = 2048)
     private String nom;
 
     @OneToMany(mappedBy="modul")

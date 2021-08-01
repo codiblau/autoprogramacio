@@ -16,10 +16,10 @@ public @Data class CompetenciaProfessional {
     @Column(name = "nom_es", nullable = false)
     private String nomES;
 
-    @Column(name = "nom_ca", nullable = false)
+    @Column(name = "nom_ca", nullable = false, length = 2048)
     private String nomCA;
 
-    @Column(name = "ordre", nullable = false)
+    @Column(name = "ordre", nullable = false, length = 2048)
     private Integer ordre;
 
     @ManyToOne
