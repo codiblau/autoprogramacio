@@ -1,6 +1,7 @@
-package com.codiblau.autoprogramacio.model;
+package com.codiblau.autoprogramacio.model.boe;
 
-import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.codiblau.autoprogramacio.model.programacio.Programacio;
+import com.codiblau.autoprogramacio.model.programacio.UnitatFormativa;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import lombok.Data;
 
@@ -33,6 +34,6 @@ public @Data class Modul {
 
     @OneToMany(mappedBy="modul")
     @JsonManagedReference
-    private Set<UnitatFormativa> unitatsFormatives = new HashSet<>();
+    private Set<Programacio> programacions = new HashSet<>();
 
 }

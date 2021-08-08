@@ -1,4 +1,4 @@
-package com.codiblau.autoprogramacio.model;
+package com.codiblau.autoprogramacio.model.boe;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
@@ -26,9 +26,7 @@ public @Data class ResultatAprenentatgeCicle {
     private Integer ordre;
 
     @ManyToOne
-    @JoinColumn(
-            name="modul_idmodul",
-            nullable = false)
+    @JoinColumn(name="modul_idmodul", nullable = false)
     @JsonBackReference
     private Modul modul;
 

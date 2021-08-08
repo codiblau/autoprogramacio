@@ -1,7 +1,6 @@
 package com.codiblau.autoprogramacio.repository;
 
-import com.codiblau.autoprogramacio.model.CriteriAvaluacio;
-import com.codiblau.autoprogramacio.model.ResultatAprenentatgeCicle;
+import com.codiblau.autoprogramacio.model.boe.CriteriAvaluacio;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 

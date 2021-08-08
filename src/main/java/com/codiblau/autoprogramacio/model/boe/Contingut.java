@@ -1,17 +1,18 @@
-package com.codiblau.autoprogramacio.model;
+package com.codiblau.autoprogramacio.model.boe;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import lombok.Data;
 
 import javax.persistence.*;
 
+
 @Entity
-@Table(name = "autoprogramacio_criteriavaluacio")
-public @Data class CriteriAvaluacio {
+@Table(name = "autoprogramacio_contingut")
+public @Data class Contingut {
     @Id
-    @Column(name = "idca")
+    @Column(name = "idcontingut")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long idca;
+    private Long idcontingut;
 
     @Column(name = "nom_es", nullable = false, length = 2048)
     private String nomES;
@@ -22,13 +23,15 @@ public @Data class CriteriAvaluacio {
     @Column(name = "ordre", nullable = false)
     private Integer ordre;
 
+    @Column(name = "basic", nullable = false)
+    private Boolean basic;
+
     @Column(name = "excepcio", nullable = false)
     private Boolean excepcio;
 
     @ManyToOne
-    @JoinColumn(
-            name="resultataprenentatge_idresultataprenentatge",
-            nullable = false)
+    @JoinColumn(name="modul_idmodul", nullable = false)
     @JsonBackReference
-    private ResultatAprenentatgeCicle resultatAprenentatgeCicle;
+    private Modul modul;
+
 }

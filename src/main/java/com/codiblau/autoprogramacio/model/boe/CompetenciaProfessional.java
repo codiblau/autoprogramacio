@@ -1,4 +1,4 @@
-package com.codiblau.autoprogramacio.model;
+package com.codiblau.autoprogramacio.model.boe;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import lombok.Data;
@@ -23,9 +23,7 @@ public @Data class CompetenciaProfessional {
     private Integer ordre;
 
     @ManyToOne
-    @JoinColumn(
-            name="modul_idmodul",
-            nullable = false)
+    @JoinColumn(name="modul_idmodul", nullable = false)
     @JsonBackReference
     private Modul modul;
 }

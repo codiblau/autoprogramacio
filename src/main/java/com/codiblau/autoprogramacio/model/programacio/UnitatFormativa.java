@@ -1,5 +1,6 @@
-package com.codiblau.autoprogramacio.model;
+package com.codiblau.autoprogramacio.model.programacio;
 
+import com.codiblau.autoprogramacio.model.boe.Modul;
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import lombok.Data;
@@ -28,11 +29,9 @@ public @Data class UnitatFormativa {
     private Integer ordre;
 
     @ManyToOne
-    @JoinColumn(
-            name="modul_idmodul",
-            nullable = false)
+    @JoinColumn(name="programacio_idprogramacio", nullable = false)
     @JsonBackReference
-    private Modul modul;
+    private Programacio programacio;
 
     @OneToMany(mappedBy="unitatFormativa")
     @JsonManagedReference

@@ -1,12 +1,9 @@
-package com.codiblau.autoprogramacio.model;
+package com.codiblau.autoprogramacio.model.boe;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
-import com.fasterxml.jackson.annotation.JsonManagedReference;
 import lombok.Data;
 
 import javax.persistence.*;
-import java.util.HashSet;
-import java.util.Set;
 
 @Entity
 @Table(name = "autoprogramacio_resultataprenentatgegeneral")
@@ -26,9 +23,7 @@ public @Data class ResultatAprenentatgeGeneral {
     private Integer ordre;
 
     @ManyToOne
-    @JoinColumn(
-            name="resultataprenentatge_idresultataprenentatge",
-            nullable = false)
+    @JoinColumn(name="resultataprenentatge_idresultataprenentatge", nullable = true)
     @JsonBackReference
     private ResultatAprenentatgeCicle resultatAprenentatgeCicle;
 }

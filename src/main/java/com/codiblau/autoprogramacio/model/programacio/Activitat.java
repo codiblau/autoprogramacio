@@ -1,5 +1,7 @@
-package com.codiblau.autoprogramacio.model;
+package com.codiblau.autoprogramacio.model.programacio;
 
+import com.codiblau.autoprogramacio.model.boe.Contingut;
+import com.codiblau.autoprogramacio.model.boe.CriteriAvaluacio;
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import lombok.Data;
 
@@ -25,9 +27,7 @@ public @Data class Activitat {
     private Integer temps;
 
     @ManyToOne
-    @JoinColumn(
-            name="unitatformativa_idunitatformativa",
-            nullable = false)
+    @JoinColumn(name="unitatformativa_idunitatformativa", nullable = false)
     @JsonBackReference
     private UnitatFormativa unitatFormativa;
 
