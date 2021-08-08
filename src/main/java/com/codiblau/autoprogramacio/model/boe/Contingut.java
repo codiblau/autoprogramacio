@@ -21,7 +21,7 @@ public @Data class Contingut {
     private String nomCA;
 
     @Column(name = "ordre", nullable = false)
-    private Integer ordre;
+    private Double ordre;
 
     @Column(name = "basic", nullable = false)
     private Boolean basic;

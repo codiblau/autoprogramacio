@@ -16,6 +16,10 @@ import java.util.List;
 
 @RestController
 public class LoadModulMISOXController {
+    private static final String GOOGLE_ESPANOL = "es";
+
+    private static final String GOOGLE_CATALA = "ca";
+
     @Autowired
     ModulService modulService;
 
@@ -37,10 +41,6 @@ public class LoadModulMISOXController {
     @Autowired
     GoogleCloudManager googleCloudManager;
 
-    private static final String GOOGLE_ESPANOL = "es";
-
-    private static final String GOOGLE_CATALA = "ca";
-
 
     @GetMapping("/load/misox")
     @Transactional
@@ -48,10 +48,10 @@ public class LoadModulMISOXController {
 
         Modul m = this.loadModul();
         this.loadResultatsAprenentatgeCicle(m);
-        //this.loadResultatsAprenentatgeGenerals(m);
-        //this.loadCompetencies(m);
-        //this.loadContinguts(m);
-        //this.loadCriterisAvaluacio(m);
+        this.loadResultatsAprenentatgeGenerals(m);
+        this.loadCompetencies(m);
+        this.loadContinguts(m);
+        this.loadCriterisAvaluacio(m);
 
         return new ResponseEntity<>(m.getNom() + " carregat amb èxit", HttpStatus.OK);
     }
@@ -72,8 +72,38 @@ public class LoadModulMISOXController {
 
         Integer index = 1;
         for (String s : ra) {
-            String s_ca = googleCloudManager.translate(GOOGLE_ESPANOL, GOOGLE_CATALA, s);
+            String s_ca = ""; //googleCloudManager.translate(GOOGLE_ESPANOL, GOOGLE_CATALA, s);
             resultatAprenentatgeCicleService.save(index, s, s_ca, m);
+            index++;
+        }
+    }
+
+    private void loadResultatsAprenentatgeGenerals(Modul m) {
+        List<String> resultatsaprenentatge = new ArrayList<>();
+        resultatsaprenentatge.add("a) Organizar los componentes físicos y lógicos que forman un sistema microinformático, interpretando su documentación técnica, para aplicar los medios y métodos adecuados a su instalación, montaje y mantenimiento.");
+        resultatsaprenentatge.add("b) Identificar, ensamblar y conectar componentes y periféricos utilizando las herramientas adecuadas, aplicando procedimientos, normas y protocolos de calidad y seguridad, para montar y configurar ordenadores y periféricos.");
+        resultatsaprenentatge.add("c) Reconocer y ejecutar los procedimientos de instalación de sistemas operativos y programas de aplicación, aplicando protocolos de calidad, para instalar y configurar sistemas microinformáticos.");
+        resultatsaprenentatge.add("d) Representar la posición de los equipos, líneas de transmisión y demás elementos de una red local, analizando la morfología, condiciones y características del despliegue, para replantear el cableado y la electrónica de la red.");
+        resultatsaprenentatge.add("e) Ubicar y fijar equipos, líneas, canalizaciones y demás elementos de una red local cableada, inalámbrica o mixta, aplicando procedimientos de montaje y protocolos de calidad y seguridad, para instalar y configurar redes locales.");
+        resultatsaprenentatge.add("f) Interconectar equipos informáticos, dispositivos de red local y de conexión con redes de área extensa, ejecutando los procedimientos para instalar y configurar redes locales.");
+        resultatsaprenentatge.add("g) Localizar y reparar averías y disfunciones en los componentes físicos y lógicos para mantener sistemas microinformáticos y redes locales.");
+        resultatsaprenentatge.add("h) Sustituir y ajustar componentes físicos y lógicos para mantener sistemas microinformáticos y redes locales.");
+        resultatsaprenentatge.add("i) Interpretar y seleccionar información para elaborar documentación técnica y administrativa.");
+        resultatsaprenentatge.add("j) Valorar el coste de los componentes físicos, lógicos y la mano de obra, para elaborar presupuestos.");
+        resultatsaprenentatge.add("k) Reconocer características y posibilidades de los componentes físicos y lógicos, para asesorar y asistir a clientes.");
+        resultatsaprenentatge.add("l) Detectar y analizar cambios tecnológicos para elegir nuevas alternativas y mantenerse actualizado dentro del sector.");
+        resultatsaprenentatge.add("m) Reconocer y valorar incidencias, determinando sus causas y describiendo las acciones correctoras para resolverlas.");
+        resultatsaprenentatge.add("n) Analizar y describir procedimientos de calidad, prevención de riesgos laborales y medioambientales, señalando las acciones a realizar en los casos definidos para actuar de acuerdo con las normas estandarizadas.");
+        resultatsaprenentatge.add("ñ) Valorar las actividades de trabajo en un proceso productivo, identificando su aportación al proceso global para conseguir los objetivos de la producción.");
+        resultatsaprenentatge.add("o) Identificar y valorar las oportunidades de aprendizaje y empleo, analizando las ofertas y demandas del mercado laboral para gestionar su carrera profesional.");
+        resultatsaprenentatge.add("p) Reconocer las oportunidades de negocio, identificando y analizando demandas del mercado para crear y gestionar una pequeña empresa.");
+        resultatsaprenentatge.add("q) Reconocer sus derechos y deberes como agente activo en la sociedad, analizando el marco legal que regula las condiciones sociales y laborales para participar como ciudadano democrático.");
+
+        Integer index = 1;
+        for (String s : resultatsaprenentatge) {
+            String s_ca = ""; //googleCloudManager.translate(GOOGLE_ESPANOL, GOOGLE_CATALA, s);
+            resultatAprenentatgeGeneralService.save(index, s, s_ca, m);
+
             index++;
         }
     }
@@ -106,56 +136,18 @@ public class LoadModulMISOXController {
 
         Integer index = 1;
         for (String s : competencies) {
-            CompetenciaProfessional cp = new CompetenciaProfessional();
-            cp.setOrdre(index);
-            cp.setNomES(s);
-            cp.setNomCA("");
-            cp.setModul(m);
-
-            competenciaProfessionalService.save(cp);
+            String s_ca = ""; //googleCloudManager.translate(GOOGLE_ESPANOL, GOOGLE_CATALA, s);
+            competenciaProfessionalService.save(index, s, s_ca, m);
 
             index++;
         }
     }
 
-    private void loadResultatsAprenentatgeGenerals(Modul m) {
-        List<String> resultatsaprenentatge = new ArrayList<>();
-        resultatsaprenentatge.add("a) Organizar los componentes físicos y lógicos que forman un sistema microinformático, interpretando su documentación técnica, para aplicar los medios y métodos adecuados a su instalación, montaje y mantenimiento.");
-        resultatsaprenentatge.add("b) Identificar, ensamblar y conectar componentes y periféricos utilizando las herramientas adecuadas, aplicando procedimientos, normas y protocolos de calidad y seguridad, para montar y configurar ordenadores y periféricos.");
-        resultatsaprenentatge.add("c) Reconocer y ejecutar los procedimientos de instalación de sistemas operativos y programas de aplicación, aplicando protocolos de calidad, para instalar y configurar sistemas microinformáticos.");
-        resultatsaprenentatge.add("d) Representar la posición de los equipos, líneas de transmisión y demás elementos de una red local, analizando la morfología, condiciones y características del despliegue, para replantear el cableado y la electrónica de la red.");
-        resultatsaprenentatge.add("e) Ubicar y fijar equipos, líneas, canalizaciones y demás elementos de una red local cableada, inalámbrica o mixta, aplicando procedimientos de montaje y protocolos de calidad y seguridad, para instalar y configurar redes locales.");
-        resultatsaprenentatge.add("f) Interconectar equipos informáticos, dispositivos de red local y de conexión con redes de área extensa, ejecutando los procedimientos para instalar y configurar redes locales.");
-        resultatsaprenentatge.add("g) Localizar y reparar averías y disfunciones en los componentes físicos y lógicos para mantener sistemas microinformáticos y redes locales.");
-        resultatsaprenentatge.add("h) Sustituir y ajustar componentes físicos y lógicos para mantener sistemas microinformáticos y redes locales.");
-        resultatsaprenentatge.add("i) Interpretar y seleccionar información para elaborar documentación técnica y administrativa.");
-        resultatsaprenentatge.add("j) Valorar el coste de los componentes físicos, lógicos y la mano de obra, para elaborar presupuestos.");
-        resultatsaprenentatge.add("k) Reconocer características y posibilidades de los componentes físicos y lógicos, para asesorar y asistir a clientes.");
-        resultatsaprenentatge.add("l) Detectar y analizar cambios tecnológicos para elegir nuevas alternativas y mantenerse actualizado dentro del sector.");
-        resultatsaprenentatge.add("m) Reconocer y valorar incidencias, determinando sus causas y describiendo las acciones correctoras para resolverlas.");
-        resultatsaprenentatge.add("n) Analizar y describir procedimientos de calidad, prevención de riesgos laborales y medioambientales, señalando las acciones a realizar en los casos definidos para actuar de acuerdo con las normas estandarizadas.");
-        resultatsaprenentatge.add("ñ) Valorar las actividades de trabajo en un proceso productivo, identificando su aportación al proceso global para conseguir los objetivos de la producción.");
-        resultatsaprenentatge.add("o) Identificar y valorar las oportunidades de aprendizaje y empleo, analizando las ofertas y demandas del mercado laboral para gestionar su carrera profesional.");
-        resultatsaprenentatge.add("p) Reconocer las oportunidades de negocio, identificando y analizando demandas del mercado para crear y gestionar una pequeña empresa.");
-        resultatsaprenentatge.add("q) Reconocer sus derechos y deberes como agente activo en la sociedad, analizando el marco legal que regula las condiciones sociales y laborales para participar como ciudadano democrático.");
 
-        Integer index = 1;
-        for (String s : resultatsaprenentatge) {
-            ResultatAprenentatgeGeneral ra = new ResultatAprenentatgeGeneral();
-            ra.setOrdre(index);
-            ra.setNomES(s);
-            ra.setNomCA("");
-
-            resultatAprenentatgeGeneralService.save(ra);
-
-            index++;
-        }
-    }
 
 
     private void loadContinguts(Modul m) {
-        Contingut c1 = new Contingut();
-        c1.setNomES("1. Caracterización de sistemas operativos:\n" +
+        contingutService.save(1.1, "1. Caracterización de sistemas operativos:\n" +
                 "El sistema informático.\n" +
                 "Software de base de un sistema informático.\n" +
                 "Concepto de sistema operativo. Elementos y estructura del Sistema Operativo.\n" +
@@ -165,14 +157,9 @@ public class LoadModulMISOXController {
                 "Sistemas operativos actuales. Sistemas operativos libres y propietarios.\n" +
                 "Comparativa entre sistemas operativos.\n" +
                 "Características comunes.\n" +
-                "Entornos de aplicación.");
-        c1.setNomCA("");
-        c1.setOrdre(1);
-        c1.setModul(m);
+                "Entornos de aplicación.","",m);
 
-        contingutService.save(c1);
-
-        Contingut c2 = new Contingut();
+        /*Contingut c2 = new Contingut();
         c2.setNomES("2.  Operación de sistemas de archivos:\n" +
                 "Sistemas de archivos, archivo, directorio, atributos, permisos.\n" +
                 "Operación con archivos: nombre y extensión, comodines, atributos, tipos. Operaciones\n" +
@@ -187,7 +174,7 @@ public class LoadModulMISOXController {
         c2.setOrdre(2);
         c2.setModul(m);
 
-        contingutService.save(c2);
+        contingutService.save(c2);*/
     }
 
     private void loadCriterisAvaluacio(Modul m) {

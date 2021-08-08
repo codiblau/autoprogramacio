@@ -13,8 +13,14 @@ public class ResultatAprenentatgeGeneralService {
     @Autowired
     ResultatAprenentatgeGeneralRepository resultatAprenentatgeGeneralRepository;
 
-    public void save(ResultatAprenentatgeGeneral r){
-        resultatAprenentatgeGeneralRepository.save(r);
+    public void save(Integer index, String es, String ca, Modul m){
+        ResultatAprenentatgeGeneral ra = new ResultatAprenentatgeGeneral();
+        ra.setOrdre(index);
+        ra.setNomES(es);
+        ra.setNomCA(ca);
+        ra.setModul(m);
+
+        resultatAprenentatgeGeneralRepository.save(ra);
     }
 
 

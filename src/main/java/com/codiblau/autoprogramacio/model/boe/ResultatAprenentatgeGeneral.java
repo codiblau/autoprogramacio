@@ -4,6 +4,8 @@ import com.fasterxml.jackson.annotation.JsonBackReference;
 import lombok.Data;
 
 import javax.persistence.*;
+import java.util.HashSet;
+import java.util.Set;
 
 @Entity
 @Table(name = "autoprogramacio_resultataprenentatgegeneral")
@@ -23,7 +25,11 @@ public @Data class ResultatAprenentatgeGeneral {
     private Integer ordre;
 
     @ManyToOne
-    @JoinColumn(name="resultataprenentatge_idresultataprenentatge", nullable = true)
+    @JoinColumn(name="modul_idmodul", nullable = false)
     @JsonBackReference
-    private ResultatAprenentatgeCicle resultatAprenentatgeCicle;
+    private Modul modul;
+
+
+    @ManyToMany(mappedBy = "resultatAprenentatgeGeneral")
+    private Set<ResultatAprenentatgeCicle> resultatsAprenentatgeCicle = new HashSet<>();
 }
