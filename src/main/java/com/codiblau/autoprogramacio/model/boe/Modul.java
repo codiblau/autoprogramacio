@@ -10,7 +10,7 @@ import java.util.HashSet;
 import java.util.Set;
 
 @Entity
-@Table(name = "autoprogramacio_modul")
+@Table(name = "ap_modul")
 public @Data class Modul {
     @Id
     @Column(name = "idmodul")

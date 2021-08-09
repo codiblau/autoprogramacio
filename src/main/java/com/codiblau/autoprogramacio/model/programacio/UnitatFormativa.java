@@ -11,7 +11,7 @@ import java.util.HashSet;
 import java.util.Set;
 
 @Entity
-@Table(name = "autoprogramacio_unitatformativa")
+@Table(name = "ap_unitatformativa")
 public @Data class UnitatFormativa {
     @Id
     @Column(name = "idunitatformativa")

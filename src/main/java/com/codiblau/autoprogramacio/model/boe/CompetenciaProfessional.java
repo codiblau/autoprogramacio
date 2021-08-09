@@ -6,7 +6,7 @@ import lombok.Data;
 import javax.persistence.*;
 
 @Entity
-@Table(name = "autoprogramacio_competenciaprofessional")
+@Table(name = "ap_competenciaprofessional")
 public @Data class CompetenciaProfessional {
     @Id
     @Column(name = "idcompetencia")

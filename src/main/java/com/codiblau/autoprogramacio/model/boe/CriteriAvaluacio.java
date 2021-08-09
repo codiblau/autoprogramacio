@@ -6,7 +6,7 @@ import lombok.Data;
 import javax.persistence.*;
 
 @Entity
-@Table(name = "autoprogramacio_criteriavaluacio")
+@Table(name = "ap_criteriavaluacio")
 public @Data class CriteriAvaluacio {
     @Id
     @Column(name = "idca")

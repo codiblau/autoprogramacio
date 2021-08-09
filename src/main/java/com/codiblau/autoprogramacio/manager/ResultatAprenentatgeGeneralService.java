@@ -8,17 +8,24 @@ import com.codiblau.autoprogramacio.repository.ResultatAprenentatgeGeneralReposi
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+import java.util.Set;
+
 @Service
 public class ResultatAprenentatgeGeneralService {
     @Autowired
     ResultatAprenentatgeGeneralRepository resultatAprenentatgeGeneralRepository;
 
-    public void save(Integer index, String es, String ca, Modul m){
+    public void save(Integer index, String es, String ca, Modul m, Set<ResultatAprenentatgeCicle> resultatsAprenentatgeCicle){
         ResultatAprenentatgeGeneral ra = new ResultatAprenentatgeGeneral();
         ra.setOrdre(index);
         ra.setNomES(es);
         ra.setNomCA(ca);
         ra.setModul(m);
+        if(resultatsAprenentatgeCicle != null) {
+            System.out.println("rac es:"+resultatsAprenentatgeCicle.toArray()[0]);
+            ra.setResultatsAprenentatgeCicle(resultatsAprenentatgeCicle);
+        }
 
         resultatAprenentatgeGeneralRepository.save(ra);
     }

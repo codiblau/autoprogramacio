@@ -11,11 +11,13 @@ public class ContingutService {
     @Autowired
     ContingutRepository contingutRepository;
 
-    public void save(Double index, String es, String ca, Modul m) {
+    public void save(Double index, String es, String ca,Boolean basic, Boolean excepcio, Modul m) {
         Contingut c = new Contingut();
         c.setNomES(es);
         c.setNomCA(ca);
         c.setOrdre(index);
+        c.setExcepcio(excepcio);
+        c.setBasic(basic);
         c.setModul(m);
         contingutRepository.save(c);
     }

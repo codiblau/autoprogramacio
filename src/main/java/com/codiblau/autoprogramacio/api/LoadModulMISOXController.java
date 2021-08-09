@@ -12,7 +12,9 @@ import org.springframework.web.bind.annotation.RestController;
 import javax.servlet.http.HttpServletRequest;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 @RestController
 public class LoadModulMISOXController {
@@ -49,9 +51,9 @@ public class LoadModulMISOXController {
         Modul m = this.loadModul();
         this.loadResultatsAprenentatgeCicle(m);
         this.loadResultatsAprenentatgeGenerals(m);
-        this.loadCompetencies(m);
+        //this.loadCompetencies(m);
         this.loadContinguts(m);
-        this.loadCriterisAvaluacio(m);
+        //this.loadCriterisAvaluacio(m);
 
         return new ResponseEntity<>(m.getNom() + " carregat amb èxit", HttpStatus.OK);
     }
@@ -102,7 +104,10 @@ public class LoadModulMISOXController {
         Integer index = 1;
         for (String s : resultatsaprenentatge) {
             String s_ca = ""; //googleCloudManager.translate(GOOGLE_ESPANOL, GOOGLE_CATALA, s);
-            resultatAprenentatgeGeneralService.save(index, s, s_ca, m);
+            Set<ResultatAprenentatgeCicle> rac = new HashSet<>();
+            //rac.add(resultatAprenentatgeCicleService.findByOrdreAndModul(1,m));
+
+            resultatAprenentatgeGeneralService.save(index, s, s_ca, m, rac);
 
             index++;
         }
@@ -143,38 +148,223 @@ public class LoadModulMISOXController {
         }
     }
 
-
-
-
     private void loadContinguts(Modul m) {
-        contingutService.save(1.1, "1. Caracterización de sistemas operativos:\n" +
-                "El sistema informático.\n" +
-                "Software de base de un sistema informático.\n" +
-                "Concepto de sistema operativo. Elementos y estructura del Sistema Operativo.\n" +
-                "Funciones del sistema operativo. Recursos.\n" +
-                "Utilización del sistema operativo: modo orden, modo gráfico.\n" +
-                "Procesos del sistema operativo. Estados de los procesos. Prioridad.\n" +
-                "Sistemas operativos actuales. Sistemas operativos libres y propietarios.\n" +
-                "Comparativa entre sistemas operativos.\n" +
-                "Características comunes.\n" +
-                "Entornos de aplicación.","",m);
+        String s = "Caracterización de sistemas operativos: El sistema informático.";
+        String s_ca = ""; //googleCloudManager.translate(GOOGLE_ESPANOL, GOOGLE_CATALA, s);
+        contingutService.save(1.1, s, s_ca, true, false, m);
 
-        /*Contingut c2 = new Contingut();
-        c2.setNomES("2.  Operación de sistemas de archivos:\n" +
-                "Sistemas de archivos, archivo, directorio, atributos, permisos.\n" +
-                "Operación con archivos: nombre y extensión, comodines, atributos, tipos. Operaciones\n" +
-                "más comunes.\n" +
-                "Operación con directorios: nombre, atributos, permisos. Operaciones más comunes.\n" +
-                "Selección de un sistema de archivos.\n" +
-                "Tipo de sistemas de archivos y sus características.\n" +
-                "Transacciones. Sistemas transaccionales.\n" +
-                "Operaciones en sistemas operativos libres.\n" +
-                "Operaciones en sistemas operativos propietarios.");
-        c2.setNomCA("");
-        c2.setOrdre(2);
-        c2.setModul(m);
+        s = "Caracterización de sistemas operativos: Software de base de un sistema informático.";
+        s_ca = ""; //googleCloudManager.translate(GOOGLE_ESPANOL, GOOGLE_CATALA, s);
+        contingutService.save(1.2, s, s_ca, true, false, m);
 
-        contingutService.save(c2);*/
+        s = "Caracterización de sistemas operativos: Concepto de sistema operativo. Elementos y estructura del Sistema Operativo.";
+        s_ca = ""; //googleCloudManager.translate(GOOGLE_ESPANOL, GOOGLE_CATALA, s);
+        contingutService.save(1.3, s, s_ca, true, false, m);
+
+        s = "Caracterización de sistemas operativos: Funciones del sistema operativo. Recursos.";
+        s_ca = ""; //googleCloudManager.translate(GOOGLE_ESPANOL, GOOGLE_CATALA, s);
+        contingutService.save(1.4, s, s_ca, true, false, m);
+
+        s = "Caracterización de sistemas operativos: Utilización del sistema operativo: modo orden, modo gráfico.";
+        s_ca = ""; //googleCloudManager.translate(GOOGLE_ESPANOL, GOOGLE_CATALA, s);
+        contingutService.save(1.5, s, s_ca, true, false, m);
+
+        s = "Caracterización de sistemas operativos: Procesos del sistema operativo. Estados de los procesos. Prioridad.";
+        s_ca = ""; //googleCloudManager.translate(GOOGLE_ESPANOL, GOOGLE_CATALA, s);
+        contingutService.save(1.6, s, s_ca, true, false, m);
+
+        s = "Caracterización de sistemas operativos: Sistemas operativos actuales. Sistemas operativos libres y propietarios.";
+        s_ca = ""; //googleCloudManager.translate(GOOGLE_ESPANOL, GOOGLE_CATALA, s);
+        contingutService.save(1.7, s, s_ca, true, false, m);
+
+        s = "Caracterización de sistemas operativos: Comparativa entre sistemas operativos.";
+        s_ca = ""; //googleCloudManager.translate(GOOGLE_ESPANOL, GOOGLE_CATALA, s);
+        contingutService.save(1.8, s, s_ca, false, false, m);
+
+        s = "Caracterización de sistemas operativos: Características comunes.";
+        s_ca = ""; //googleCloudManager.translate(GOOGLE_ESPANOL, GOOGLE_CATALA, s);
+        contingutService.save(1.9, s, s_ca, false, false, m);
+
+        s = "Caracterización de sistemas operativos: Características comunes.";
+        s_ca = ""; //googleCloudManager.translate(GOOGLE_ESPANOL, GOOGLE_CATALA, s);
+        contingutService.save(1.10, s, s_ca, false, false, m);
+
+        s = "Operación de sistemas de archivos: Sistemas de archivos, archivo, directorio, atributos, permisos.";
+        s_ca = ""; //googleCloudManager.translate(GOOGLE_ESPANOL, GOOGLE_CATALA, s);
+        contingutService.save(2.1, s, s_ca, true, false, m);
+
+        s = "Operación de sistemas de archivos: Operación con archivos: nombre y extensión, comodines, atributos, tipos. Operaciones más comunes.";
+        s_ca = ""; //googleCloudManager.translate(GOOGLE_ESPANOL, GOOGLE_CATALA, s);
+        contingutService.save(2.2, s, s_ca, true, false, m);
+
+        s = "Operación de sistemas de archivos: Operación con directorios: nombre, atributos, permisos. Operaciones más comunes.";
+        s_ca = ""; //googleCloudManager.translate(GOOGLE_ESPANOL, GOOGLE_CATALA, s);
+        contingutService.save(2.3, s, s_ca, true, false, m);
+
+        s = "Operación de sistemas de archivos: Selección de un sistema de archivos.";
+        s_ca = ""; //googleCloudManager.translate(GOOGLE_ESPANOL, GOOGLE_CATALA, s);
+        contingutService.save(2.4, s, s_ca, true, false, m);
+
+        s = "Operación de sistemas de archivos: Tipo de sistemas de archivos y sus características.";
+        s_ca = ""; //googleCloudManager.translate(GOOGLE_ESPANOL, GOOGLE_CATALA, s);
+        contingutService.save(2.5, s, s_ca, true, false, m);
+
+        s = "Operación de sistemas de archivos: Transacciones. Sistemas transaccionales.";
+        s_ca = ""; //googleCloudManager.translate(GOOGLE_ESPANOL, GOOGLE_CATALA, s);
+        contingutService.save(2.6, s, s_ca, true, false, m);
+
+        s = "Operación de sistemas de archivos: Operaciones en sistemas operativos libres.";
+        s_ca = ""; //googleCloudManager.translate(GOOGLE_ESPANOL, GOOGLE_CATALA, s);
+        contingutService.save(2.7, s, s_ca, false, false, m);
+
+        s = "Operación de sistemas de archivos: Operaciones en sistemas operativos propietarios.";
+        s_ca = ""; //googleCloudManager.translate(GOOGLE_ESPANOL, GOOGLE_CATALA, s);
+        contingutService.save(2.8, s, s_ca, false, false, m);
+
+        s = "Instalación de sistemas operativos libres y propietarios: Caracterización de sistemas operativos: El sistema informático. Características técnicas del hardware para la instalación.";
+        s_ca = ""; //googleCloudManager.translate(GOOGLE_ESPANOL, GOOGLE_CATALA, s);
+        contingutService.save(3.1, s, s_ca, true, false, m);
+
+        s = "Instalación de sistemas operativos libres y propietarios: Caracterización de sistemas operativos: Software de base de un sistema informático.";
+        s_ca = ""; //googleCloudManager.translate(GOOGLE_ESPANOL, GOOGLE_CATALA, s);
+        contingutService.save(3.2, s, s_ca, true, false, m);
+
+        s = "Instalación de sistemas operativos libres y propietarios: Caracterización de sistemas operativos: Sistema operativo. Elementos y estructura del Sistema Operativo.";
+        s_ca = ""; //googleCloudManager.translate(GOOGLE_ESPANOL, GOOGLE_CATALA, s);
+        contingutService.save(3.3, s, s_ca, true, false, m);
+
+        s = "Instalación de sistemas operativos libres y propietarios: Caracterización de sistemas operativos: Funciones del sistema operativo. Recursos.";
+        s_ca = ""; //googleCloudManager.translate(GOOGLE_ESPANOL, GOOGLE_CATALA, s);
+        contingutService.save(3.4, s, s_ca, true, false, m);
+
+        s = "Instalación de sistemas operativos libres y propietarios: Caracterización de sistemas operativos: Utilización del sistema operativo: modo orden, modo gráfico.\n";
+        s_ca = ""; //googleCloudManager.translate(GOOGLE_ESPANOL, GOOGLE_CATALA, s);
+        contingutService.save(3.5, s, s_ca, true, false, m);
+
+        s = "Instalación de sistemas operativos libres y propietarios: Caracterización de sistemas operativos: Procesos del sistema operativo. Estados de los procesos.";
+        s_ca = ""; //googleCloudManager.translate(GOOGLE_ESPANOL, GOOGLE_CATALA, s);
+        contingutService.save(3.6, s, s_ca, true, false, m);
+
+        s = "Instalación de sistemas operativos libres y propietarios: Caracterización de sistemas operativos: Sistemas operativos actuales.";
+        s_ca = ""; //googleCloudManager.translate(GOOGLE_ESPANOL, GOOGLE_CATALA, s);
+        contingutService.save(3.7, s, s_ca, true, false, m);
+
+        s = "Instalación de sistemas operativos libres y propietarios: Caracterización de sistemas operativos: Requisitos técnicos del sistema operativo.";
+        s_ca = ""; //googleCloudManager.translate(GOOGLE_ESPANOL, GOOGLE_CATALA, s);
+        contingutService.save(3.8, s, s_ca, true, false, m);
+
+        s = "Instalación de sistemas operativos libres y propietarios: Caracterización de sistemas operativos: Planificación de la instalación: particiones, sistema de archivos.";
+        s_ca = ""; //googleCloudManager.translate(GOOGLE_ESPANOL, GOOGLE_CATALA, s);
+        contingutService.save(3.9, s, s_ca, true, false, m);
+
+        s = "Instalación de sistemas operativos libres y propietarios: Caracterización de sistemas operativos: Selección de aplicaciones básicas a instalar.";
+        s_ca = ""; //googleCloudManager.translate(GOOGLE_ESPANOL, GOOGLE_CATALA, s);
+        contingutService.save(3.10, s, s_ca, true, false, m);
+
+        s = "Instalación de sistemas operativos libres y propietarios: Caracterización de sistemas operativos: Parámetros básicos de la instalación. Requerimientos en función de las aplicaciones.";
+        s_ca = ""; //googleCloudManager.translate(GOOGLE_ESPANOL, GOOGLE_CATALA, s);
+        contingutService.save(3.11, s, s_ca, true, false, m);
+
+        s = "Instalación de sistemas operativos libres y propietarios: Caracterización de sistemas operativos: Instalación de sistemas operativos libres.";
+        s_ca = ""; //googleCloudManager.translate(GOOGLE_ESPANOL, GOOGLE_CATALA, s);
+        contingutService.save(3.12, s, s_ca, false, false, m);
+
+        s = "Instalación de sistemas operativos libres y propietarios: Caracterización de sistemas operativos: Instalación de sistemas operativos propietarios.";
+        s_ca = ""; //googleCloudManager.translate(GOOGLE_ESPANOL, GOOGLE_CATALA, s);
+        contingutService.save(3.13, s, s_ca, false, false, m);
+
+        s = "Realización de tareas básicas sobre sistemas operativos libres y propietarios: Arranque y parada del sistema. Sesiones.";
+        s_ca = ""; //googleCloudManager.translate(GOOGLE_ESPANOL, GOOGLE_CATALA, s);
+        contingutService.save(4.1, s, s_ca, true, false, m);
+
+        s = "Realización de tareas básicas sobre sistemas operativos libres y propietarios: Interfaces de usuario: tipos, propiedades y usos.";
+        s_ca = ""; //googleCloudManager.translate(GOOGLE_ESPANOL, GOOGLE_CATALA, s);
+        contingutService.save(4.2, s, s_ca, true, false, m);
+
+        s = "Realización de tareas básicas sobre sistemas operativos libres y propietarios: Configuración de las preferencias de escritorio.";
+        s_ca = ""; //googleCloudManager.translate(GOOGLE_ESPANOL, GOOGLE_CATALA, s);
+        contingutService.save(4.3, s, s_ca, true, false, m);
+
+        s = "Realización de tareas básicas sobre sistemas operativos libres y propietarios: Estructura del árbol de directorios.";
+        s_ca = ""; //googleCloudManager.translate(GOOGLE_ESPANOL, GOOGLE_CATALA, s);
+        contingutService.save(4.4, s, s_ca, true, false, m);
+
+        s = "Realización de tareas básicas sobre sistemas operativos libres y propietarios: Compresión/Descompresión.";
+        s_ca = ""; //googleCloudManager.translate(GOOGLE_ESPANOL, GOOGLE_CATALA, s);
+        contingutService.save(4.5, s, s_ca, true, false, m);
+
+        s = "Realización de tareas básicas sobre sistemas operativos libres y propietarios: Actualización del sistema operativo.";
+        s_ca = ""; //googleCloudManager.translate(GOOGLE_ESPANOL, GOOGLE_CATALA, s);
+        contingutService.save(4.6, s, s_ca, true, false, m);
+
+        s = "Realización de tareas básicas sobre sistemas operativos libres y propietarios: Agregar / eliminar / actualizar software del sistema operativo.";
+        s_ca = ""; //googleCloudManager.translate(GOOGLE_ESPANOL, GOOGLE_CATALA, s);
+        contingutService.save(4.7, s, s_ca, true, false, m);
+
+        s = "Realización de tareas básicas sobre sistemas operativos libres y propietarios: Operaciones con sistemas operativos libres.";
+        s_ca = ""; //googleCloudManager.translate(GOOGLE_ESPANOL, GOOGLE_CATALA, s);
+        contingutService.save(4.8, s, s_ca, false, false, m);
+
+        s = "Realización de tareas básicas sobre sistemas operativos libres y propietarios: Operaciones con sistemas operativos propietarios.";
+        s_ca = ""; //googleCloudManager.translate(GOOGLE_ESPANOL, GOOGLE_CATALA, s);
+        contingutService.save(4.9, s, s_ca, false, false, m);
+
+        s = "Administración de los sistemas operativos: Gestión de perfiles de usuarios y grupos locales. Contraseñas.";
+        s_ca = ""; //googleCloudManager.translate(GOOGLE_ESPANOL, GOOGLE_CATALA, s);
+        contingutService.save(5.1, s, s_ca, true, false, m);
+
+        s = "Administración de los sistemas operativos: Gestión del sistema de archivos.";
+        s_ca = ""; //googleCloudManager.translate(GOOGLE_ESPANOL, GOOGLE_CATALA, s);
+        contingutService.save(5.2, s, s_ca, true, false, m);
+
+        s = "Administración de los sistemas operativos: Gestión de los procesos del sistema y de usuario.";
+        s_ca = ""; //googleCloudManager.translate(GOOGLE_ESPANOL, GOOGLE_CATALA, s);
+        contingutService.save(5.3, s, s_ca, true, false, m);
+
+        s = "Administración de los sistemas operativos: Rendimiento del sistema. Seguimiento de la actividad del sistema.";
+        s_ca = ""; //googleCloudManager.translate(GOOGLE_ESPANOL, GOOGLE_CATALA, s);
+        contingutService.save(5.4, s, s_ca, true, false, m);
+
+        s = "Administración de los sistemas operativos: Activación y desactivación de servicios.";
+        s_ca = ""; //googleCloudManager.translate(GOOGLE_ESPANOL, GOOGLE_CATALA, s);
+        contingutService.save(5.5, s, s_ca, true, false, m);
+
+        s = "Administración de los sistemas operativos: Compartición de recursos.";
+        s_ca = ""; //googleCloudManager.translate(GOOGLE_ESPANOL, GOOGLE_CATALA, s);
+        contingutService.save(5.6, s, s_ca, true, false, m);
+
+        s = "Administración de los sistemas operativos: Base de datos de configuración y comportamiento del sistema operativo, hardware instalado y aplicaciones.";
+        s_ca = ""; //googleCloudManager.translate(GOOGLE_ESPANOL, GOOGLE_CATALA, s);
+        contingutService.save(5.7, s, s_ca, true, false, m);
+
+        s = "Administración de los sistemas operativos: Operaciones de administración en sistemas operativos libres.";
+        s_ca = ""; //googleCloudManager.translate(GOOGLE_ESPANOL, GOOGLE_CATALA, s);
+        contingutService.save(5.8, s, s_ca, false, false, m);
+
+        s = "Administración de los sistemas operativos: Operaciones de administración en sistemas operativos propietarios.";
+        s_ca = ""; //googleCloudManager.translate(GOOGLE_ESPANOL, GOOGLE_CATALA, s);
+        contingutService.save(5.9, s, s_ca, false, false, m);
+
+        s = "Configuración de máquinas virtuales: Virtualización y máquina virtual: ventajas e inconvenientes.";
+        s_ca = ""; //googleCloudManager.translate(GOOGLE_ESPANOL, GOOGLE_CATALA, s);
+        contingutService.save(6.1, s, s_ca, true, false, m);
+
+        s = "Configuración de máquinas virtuales: Software (propietario y libre) para la creación de máquinas virtuales: instalación.";
+        s_ca = ""; //googleCloudManager.translate(GOOGLE_ESPANOL, GOOGLE_CATALA, s);
+        contingutService.save(6.2, s, s_ca, true, false, m);
+
+        s = "Configuración de máquinas virtuales: Creación de máquinas virtuales para sistemas operativos propietarios y libres.";
+        s_ca = ""; //googleCloudManager.translate(GOOGLE_ESPANOL, GOOGLE_CATALA, s);
+        contingutService.save(6.3, s, s_ca, true, false, m);
+
+        s = "Configuración de máquinas virtuales: Configuración y utilización de máquinas virtuales.";
+        s_ca = ""; //googleCloudManager.translate(GOOGLE_ESPANOL, GOOGLE_CATALA, s);
+        contingutService.save(6.4, s, s_ca, true, false, m);
+
+        s = "Configuración de máquinas virtuales: Aplicaciones típicas de las máquinas virtuales.";
+        s_ca = ""; //googleCloudManager.translate(GOOGLE_ESPANOL, GOOGLE_CATALA, s);
+        contingutService.save(6.5, s, s_ca, false, false, m);
+
     }
 
     private void loadCriterisAvaluacio(Modul m) {

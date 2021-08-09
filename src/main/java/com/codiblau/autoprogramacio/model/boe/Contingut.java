@@ -7,7 +7,7 @@ import javax.persistence.*;
 
 
 @Entity
-@Table(name = "autoprogramacio_contingut")
+@Table(name = "ap_contingut")
 public @Data class Contingut {
     @Id
     @Column(name = "idcontingut")

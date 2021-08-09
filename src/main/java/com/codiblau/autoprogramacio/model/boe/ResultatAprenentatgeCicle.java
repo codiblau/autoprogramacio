@@ -9,7 +9,7 @@ import java.util.HashSet;
 import java.util.Set;
 
 @Entity
-@Table(name = "autoprogramacio_resultataprenentatgecicle")
+@Table(name = "ap_resultataprenentatgecicle")
 public @Data class ResultatAprenentatgeCicle {
     @Id
     @Column(name = "idresultataprenentatge")
@@ -34,8 +34,8 @@ public @Data class ResultatAprenentatgeCicle {
     @JsonManagedReference
     private Set<CriteriAvaluacio> criterisAvaluacio = new HashSet<>();
 
-    @ManyToMany
-    private Set<ResultatAprenentatgeGeneral> resultatAprenentatgeGeneral = new HashSet<>();
+    //@ManyToMany(mappedBy = "resultatsAprenentatgeCicle")
+    //private Set<ResultatAprenentatgeGeneral> resultatsAprenentatgeGeneral = new HashSet<>();
 
     @ManyToMany
     private Set<CompetenciaProfessional> competencies = new HashSet<>();

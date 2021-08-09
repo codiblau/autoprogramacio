@@ -7,7 +7,7 @@ import org.hibernate.annotations.Type;
 import javax.persistence.*;
 
 @Entity
-@Table(name = "autoprogramacio_seccio")
+@Table(name = "ap_seccio")
 public @Data class Seccio {
     @Id
     @Column(name = "idseccio")

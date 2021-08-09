@@ -8,7 +8,7 @@ import java.util.HashSet;
 import java.util.Set;
 
 @Entity
-@Table(name = "autoprogramacio_resultataprenentatgegeneral")
+@Table(name = "ap_resultataprenentatgegeneral")
 public @Data class ResultatAprenentatgeGeneral {
     @Id
     @Column(name = "idresultataprenentatge")
@@ -30,6 +30,6 @@ public @Data class ResultatAprenentatgeGeneral {
     private Modul modul;
 
 
-    @ManyToMany(mappedBy = "resultatAprenentatgeGeneral")
+    @ManyToMany
     private Set<ResultatAprenentatgeCicle> resultatsAprenentatgeCicle = new HashSet<>();
 }
