@@ -2,6 +2,7 @@ package com.codiblau.autoprogramacio.model.boe;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import lombok.Data;
+import lombok.EqualsAndHashCode;
 
 import javax.persistence.*;
 import java.util.HashSet;
@@ -9,6 +10,7 @@ import java.util.Set;
 
 @Entity
 @Table(name = "ap_resultataprenentatgegeneral")
+@EqualsAndHashCode(exclude="modul")
 public @Data class ResultatAprenentatgeGeneral {
     @Id
     @Column(name = "idresultataprenentatge")

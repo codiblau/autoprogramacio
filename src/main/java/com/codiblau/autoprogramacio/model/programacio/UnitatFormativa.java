@@ -4,6 +4,7 @@ import com.codiblau.autoprogramacio.model.boe.Modul;
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import lombok.Data;
+import lombok.EqualsAndHashCode;
 import org.hibernate.annotations.Type;
 
 import javax.persistence.*;
@@ -12,6 +13,7 @@ import java.util.Set;
 
 @Entity
 @Table(name = "ap_unitatformativa")
+@EqualsAndHashCode(exclude="programacio")
 public @Data class UnitatFormativa {
     @Id
     @Column(name = "idunitatformativa")

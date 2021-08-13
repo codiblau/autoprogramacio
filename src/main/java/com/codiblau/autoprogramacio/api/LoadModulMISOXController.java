@@ -2,6 +2,9 @@ package com.codiblau.autoprogramacio.api;
 
 import com.codiblau.autoprogramacio.manager.*;
 import com.codiblau.autoprogramacio.model.boe.*;
+import com.codiblau.autoprogramacio.model.programacio.Paragraf;
+import com.codiblau.autoprogramacio.model.programacio.Programacio;
+import com.codiblau.autoprogramacio.model.programacio.Seccio;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -23,6 +26,9 @@ public class LoadModulMISOXController {
     private static final String GOOGLE_CATALA = "ca";
 
     @Autowired
+    ProgramacioService programacioService;
+
+    @Autowired
     ModulService modulService;
 
     @Autowired
@@ -41,21 +47,50 @@ public class LoadModulMISOXController {
     CriteriAvaluacioService criteriAvaluacioService;
 
     @Autowired
+    SeccioService seccioService;
+
+    @Autowired
     GoogleCloudManager googleCloudManager;
 
 
     @GetMapping("/load/misox")
     @Transactional
-    public ResponseEntity loadSistemesOperatiusMonoestacio(HttpServletRequest request) throws IOException {
+    public ResponseEntity<Programacio> loadSistemesOperatiusMonoestacio(HttpServletRequest request) throws IOException {
 
         Modul m = this.loadModul();
         this.loadResultatsAprenentatgeCicle(m);
         this.loadResultatsAprenentatgeGenerals(m);
         this.loadCompetencies(m);
         this.loadContinguts(m);
-        //this.loadCriterisAvaluacio(m);
+        this.loadCriterisAvaluacio(m);
 
-        return new ResponseEntity<>(m.getNom() + " carregat amb èxit", HttpStatus.OK);
+
+        //Creem la programació
+        Programacio p = new Programacio();
+        p.setModul(m);
+        p.setCurs("2021/22");
+        p.setAutor("Joan Galmés");
+        Programacio p2 = programacioService.save(p);
+
+        Seccio s1 = new Seccio();
+        s1.setProgramacio(p2);
+        s1.setTitol("Titol seccio 1");
+        s1.setHeading(0);
+        s1.setOrdre(1);
+        s1.setAfegirContinguts(true);
+        s1.setAfegirCriterisAvaluacio(true);
+
+        Paragraf p1 = new Paragraf();
+        p1.setDescripcio("descripcio");
+        p1.setSeccio(s1);
+
+        Set<Paragraf> paragrafs = new HashSet<>();
+        paragrafs.add(p1);
+
+        seccioService.save(s1);
+
+
+        return new ResponseEntity<>(p, HttpStatus.OK);
     }
 
     private Modul loadModul() {

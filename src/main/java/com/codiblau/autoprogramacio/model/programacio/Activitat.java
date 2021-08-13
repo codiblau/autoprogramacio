@@ -4,6 +4,7 @@ import com.codiblau.autoprogramacio.model.boe.Contingut;
 import com.codiblau.autoprogramacio.model.boe.CriteriAvaluacio;
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import lombok.Data;
+import lombok.EqualsAndHashCode;
 
 import javax.persistence.*;
 import java.util.HashSet;
@@ -11,6 +12,7 @@ import java.util.Set;
 
 @Entity
 @Table(name = "ap_activitat")
+@EqualsAndHashCode(exclude="unitatFormativa")
 public @Data class Activitat {
     @Id
     @Column(name = "idactivitat")

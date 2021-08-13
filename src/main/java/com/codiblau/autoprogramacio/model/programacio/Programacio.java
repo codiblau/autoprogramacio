@@ -7,6 +7,7 @@ import com.codiblau.autoprogramacio.model.boe.ResultatAprenentatgeCicle;
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import lombok.Data;
+import lombok.EqualsAndHashCode;
 
 import javax.persistence.*;
 import java.util.HashSet;
@@ -14,14 +15,15 @@ import java.util.Set;
 
 @Entity
 @Table(name = "ap_programacio")
+@EqualsAndHashCode(exclude="modul")
 public @Data class Programacio {
     @Id
     @Column(name = "idprogramacio")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long idprogramacio;
 
-    @Column(name = "nom", nullable = false, length = 2048)
-    private String nom;
+    @Column(name = "autor", nullable = false, length = 2048)
+    private String autor;
 
     @Column(name = "curs", nullable = false, length = 255)
     private String curs;

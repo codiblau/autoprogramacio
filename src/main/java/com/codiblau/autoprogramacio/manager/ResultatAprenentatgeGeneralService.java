@@ -23,7 +23,6 @@ public class ResultatAprenentatgeGeneralService {
         ra.setNomCA(ca);
         ra.setModul(m);
         if(resultatsAprenentatgeCicle != null) {
-            System.out.println("rac es:"+resultatsAprenentatgeCicle.toArray()[0]);
             ra.setResultatsAprenentatgeCicle(resultatsAprenentatgeCicle);
         }
 

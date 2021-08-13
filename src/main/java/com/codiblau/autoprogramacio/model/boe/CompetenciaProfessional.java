@@ -2,11 +2,13 @@ package com.codiblau.autoprogramacio.model.boe;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import lombok.Data;
+import lombok.EqualsAndHashCode;
 
 import javax.persistence.*;
 
 @Entity
 @Table(name = "ap_competenciaprofessional")
+@EqualsAndHashCode(exclude="modul")
 public @Data class CompetenciaProfessional {
     @Id
     @Column(name = "idcompetencia")
