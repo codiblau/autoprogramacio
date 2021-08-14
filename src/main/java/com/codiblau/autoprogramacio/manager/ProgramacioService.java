@@ -19,7 +19,8 @@ public class ProgramacioService {
     }
 
     public Programacio getprogramacio(Long id){
-        Programacio p = programacioRepository.getById(id);
+        //Programacio p = programacioRepository.getById(id);
+        Programacio p = programacioRepository.findById(id).get();
         return p;
     }
 

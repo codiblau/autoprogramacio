@@ -30,7 +30,7 @@ public @Data class Programacio {
 
     @ManyToOne
     @JoinColumn(name="modul_idmodul", nullable = false)
-    @JsonBackReference
+    @JsonManagedReference
     private Modul modul;
 
     @OneToMany(mappedBy="programacio")

@@ -10,6 +10,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RestController;
 
 import javax.servlet.http.HttpServletRequest;
@@ -52,10 +53,15 @@ public class LoadModulMISOXController {
     @Autowired
     GoogleCloudManager googleCloudManager;
 
+    @GetMapping("/programacio/{id}")
+    public ResponseEntity<Programacio> getProgramacio(@PathVariable("id") Long idprogramacio) throws IOException {
+        Programacio p = programacioService.getprogramacio(idprogramacio);
+        return new ResponseEntity<>(p, HttpStatus.OK);
+    }
 
     @GetMapping("/load/misox")
     @Transactional
-    public ResponseEntity<Programacio> loadSistemesOperatiusMonoestacio(HttpServletRequest request) throws IOException {
+    public ResponseEntity<String> loadSistemesOperatiusMonoestacio(HttpServletRequest request) throws IOException {
 
         Modul m = this.loadModul();
         this.loadResultatsAprenentatgeCicle(m);
@@ -90,7 +96,7 @@ public class LoadModulMISOXController {
         seccioService.save(s1);
 
 
-        return new ResponseEntity<>(p, HttpStatus.OK);
+        return new ResponseEntity<>("Mòdul carregat amb èxit", HttpStatus.OK);
     }
 
     private Modul loadModul() {
