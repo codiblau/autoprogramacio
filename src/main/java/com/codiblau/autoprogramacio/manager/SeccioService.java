@@ -37,9 +37,11 @@ public class SeccioService {
 
         Seccio s2 = seccioRepository.save(s1);
 
+        Integer ordreParagraf = 1;
         for(String paragraf: paragrafs){
             Paragraf p1 = new Paragraf();
             p1.setDescripcio(paragraf);
+            p1.setOrdre(ordreParagraf++);
             p1.setSeccio(s2);
             paragrafRepository.save(p1);
         }

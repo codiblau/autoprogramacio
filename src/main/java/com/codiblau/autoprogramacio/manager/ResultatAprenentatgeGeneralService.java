@@ -29,6 +29,9 @@ public class ResultatAprenentatgeGeneralService {
         resultatAprenentatgeGeneralRepository.save(ra);
     }
 
+    public List<ResultatAprenentatgeGeneral> findByModul(Modul m){
+        return resultatAprenentatgeGeneralRepository.findAllByModul(m);
+    }
 
 }
 

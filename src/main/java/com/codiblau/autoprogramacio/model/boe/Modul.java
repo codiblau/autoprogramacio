@@ -21,7 +21,7 @@ public @Data class Modul {
     @Column(name = "nom", nullable = false, length = 2048)
     private String nom;
 
-    @OneToMany(mappedBy="modul")
+    @OneToMany(mappedBy="modul",fetch = FetchType.EAGER)
     @JsonManagedReference
     private Set<ResultatAprenentatgeGeneral> resultatsAprenentatgeGeneral = new HashSet<>();
 

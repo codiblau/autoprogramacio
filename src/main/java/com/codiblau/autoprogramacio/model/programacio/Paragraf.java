@@ -16,6 +16,9 @@ public @Data class Paragraf {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long idparagraf;
 
+    @Column(name = "ordre", nullable = false)
+    private Integer ordre;
+
     @Column(name = "descripcio")
     @Type(type="text")
     private String descripcio;
