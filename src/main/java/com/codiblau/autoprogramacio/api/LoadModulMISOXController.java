@@ -78,23 +78,11 @@ public class LoadModulMISOXController {
         p.setAutor("Joan Galmés");
         Programacio p2 = programacioService.save(p);
 
-        Seccio s1 = new Seccio();
-        s1.setProgramacio(p2);
-        s1.setTitol("Titol seccio 1");
-        s1.setHeading(0);
-        s1.setOrdre(1);
-        s1.setAfegirContinguts(true);
-        s1.setAfegirCriterisAvaluacio(true);
-
-        Paragraf p1 = new Paragraf();
-        p1.setDescripcio("descripcio");
-        p1.setSeccio(s1);
-
-        Set<Paragraf> paragrafs = new HashSet<>();
-        paragrafs.add(p1);
-
-        seccioService.save(s1);
-
+        List<String> paragrafss1 = new ArrayList<>();
+        paragrafss1.add("prova paragraf 1");
+        paragrafss1.add("prova paragraf 2");
+        paragrafss1.add("prova paragraf 3");
+        seccioService.save("Titol seccio 1",1,0,paragrafss1,p2);
 
         return new ResponseEntity<>("Mòdul carregat amb èxit", HttpStatus.OK);
     }
