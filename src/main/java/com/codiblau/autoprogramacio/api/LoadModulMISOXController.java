@@ -126,6 +126,19 @@ public class LoadModulMISOXController {
         }
         seccioService.save("Generals del cicle", ordreSeccio++, 2, s3_1, p2);
 
+        List<String> s3_2 = new ArrayList<>();
+        for(ResultatAprenentatgeCicle raCicle: resultatAprenentatgeCicleService.findByModul(m) ){
+            s3_2.add(raCicle.getNomES());
+        }
+        seccioService.save("Específics del mòdul", ordreSeccio++, 2, s3_2, p2);
+
+        List<String> s4= new ArrayList<>();
+        s4.add("El mòdul contribueix a assolir les següents competències professionals, personals i socials:");
+        for(CompetenciaProfessional competencia: competenciaProfessionalService.findByModul(m) ){
+            s4.add(competencia.getNomES());
+        }
+        seccioService.save("Competències professionals, personals i socials", ordreSeccio++, 1, s4, p2);
+
 
 
         return new ResponseEntity<>("Mòdul carregat amb èxit", HttpStatus.OK);

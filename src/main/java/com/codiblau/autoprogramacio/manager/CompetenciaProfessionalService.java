@@ -2,9 +2,12 @@ package com.codiblau.autoprogramacio.manager;
 
 import com.codiblau.autoprogramacio.model.boe.CompetenciaProfessional;
 import com.codiblau.autoprogramacio.model.boe.Modul;
+import com.codiblau.autoprogramacio.model.boe.ResultatAprenentatgeCicle;
 import com.codiblau.autoprogramacio.repository.CompetenciaProfessionalRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import java.util.List;
 
 @Service
 public class CompetenciaProfessionalService {
@@ -20,6 +23,10 @@ public class CompetenciaProfessionalService {
         cp.setModul(m);
 
         competenciaProfessionalRepository.save(cp);
+    }
+
+    public List<CompetenciaProfessional> findByModul(Modul m){
+        return competenciaProfessionalRepository.findAllByModul(m);
     }
 
 }

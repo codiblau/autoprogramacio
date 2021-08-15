@@ -2,9 +2,12 @@ package com.codiblau.autoprogramacio.manager;
 
 import com.codiblau.autoprogramacio.model.boe.Modul;
 import com.codiblau.autoprogramacio.model.boe.ResultatAprenentatgeCicle;
+import com.codiblau.autoprogramacio.model.boe.ResultatAprenentatgeGeneral;
 import com.codiblau.autoprogramacio.repository.ResultatAprenentatgeCicleRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import java.util.List;
 
 @Service
 public class ResultatAprenentatgeCicleService {
@@ -27,6 +30,10 @@ public class ResultatAprenentatgeCicleService {
 
     public ResultatAprenentatgeCicle findByOrdreAndModul(Integer ordre, Modul m){
         return resultatAprenentatgeCicleRepository.findByOrdreAndModul(ordre, m);
+    }
+
+    public List<ResultatAprenentatgeCicle> findByModul(Modul m){
+        return resultatAprenentatgeCicleRepository.findAllByModul(m);
     }
 
 }
