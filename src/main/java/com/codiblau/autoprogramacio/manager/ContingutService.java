@@ -2,9 +2,12 @@ package com.codiblau.autoprogramacio.manager;
 
 import com.codiblau.autoprogramacio.model.boe.Contingut;
 import com.codiblau.autoprogramacio.model.boe.Modul;
+import com.codiblau.autoprogramacio.model.boe.ResultatAprenentatgeCicle;
 import com.codiblau.autoprogramacio.repository.ContingutRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import java.util.List;
 
 @Service
 public class ContingutService {
@@ -20,6 +23,10 @@ public class ContingutService {
         c.setBasic(basic);
         c.setModul(m);
         contingutRepository.save(c);
+    }
+
+    public List<Contingut> findByModul(Modul m){
+        return contingutRepository.findAllByModul(m);
     }
 
 }

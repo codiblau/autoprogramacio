@@ -139,6 +139,13 @@ public class LoadModulMISOXController {
         }
         seccioService.save("Competències professionals, personals i socials", ordreSeccio++, 1, s4, p2);
 
+        List<String> s5= new ArrayList<>();
+        s5.add("Els continguts són l'eina que ajuda a assolir un resultat d'aprenentatge. A continuació es detallen els continguts que ens venen marcats per la legislació actual i es marquen en negreta i cursiva aquells que, a més, són els continguts bàsics del mòdul:");
+        for(Contingut contingut: contingutService.findByModul(m) ){
+            s5.add(contingut.getOrdre() + ") " + contingut.getNomES());
+        }
+        seccioService.save("Continguts", ordreSeccio++, 1, s5, p2);
+
 
 
         return new ResponseEntity<>("Mòdul carregat amb èxit", HttpStatus.OK);
