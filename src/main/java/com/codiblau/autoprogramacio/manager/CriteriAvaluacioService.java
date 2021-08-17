@@ -24,8 +24,8 @@ public class CriteriAvaluacioService {
         criteriAvaluacioRepository.save(cav);
     }
 
-    public List<CriteriAvaluacio> findByModul(Modul m){
-        return criteriAvaluacioRepository.findAllByModul(m);
+    public List<CriteriAvaluacio> findAllByResultatAprenentatgeCicle(ResultatAprenentatgeCicle ra){
+        return criteriAvaluacioRepository.findAllByResultatAprenentatgeCicle(ra);
     }
 
 }

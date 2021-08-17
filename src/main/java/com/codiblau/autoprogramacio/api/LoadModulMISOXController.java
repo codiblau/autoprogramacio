@@ -146,6 +146,17 @@ public class LoadModulMISOXController {
         }
         seccioService.save("Continguts", ordreSeccio++, 1, s5, p2);
 
+        List<String> s6= new ArrayList<>();
+        s6.add("Els criteris d'avaluació que venen establerts per la legislació actual i ens serviran per avaluar l'obtenció dels resultats d'aprenentatge estan relacionats de la següent manera:");
+        for(ResultatAprenentatgeCicle ra: resultatAprenentatgeCicleService.findByModul(m) ){
+            s6.add(ra.getNomES());
+            List<CriteriAvaluacio> criteris = criteriAvaluacioService.findAllByResultatAprenentatgeCicle(ra);
+            for(CriteriAvaluacio criteri: criteris){
+                s6.add(criteri.getNomES());
+            }
+        }
+        seccioService.save("Criteris d'Avaluació", ordreSeccio++, 1, s6, p2);
+
 
 
         return new ResponseEntity<>("Mòdul carregat amb èxit", HttpStatus.OK);
