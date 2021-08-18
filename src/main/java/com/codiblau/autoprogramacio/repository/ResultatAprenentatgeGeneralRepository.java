@@ -1,5 +1,6 @@
 package com.codiblau.autoprogramacio.repository;
 
+import com.codiblau.autoprogramacio.model.boe.CicleFormatiu;
 import com.codiblau.autoprogramacio.model.boe.Modul;
 import com.codiblau.autoprogramacio.model.boe.ResultatAprenentatgeCicle;
 import com.codiblau.autoprogramacio.model.boe.ResultatAprenentatgeGeneral;
@@ -10,5 +11,5 @@ import java.util.List;
 
 @Repository
 public interface ResultatAprenentatgeGeneralRepository extends JpaRepository<ResultatAprenentatgeGeneral, Long> {
-    List<ResultatAprenentatgeGeneral> findAllByModul(Modul modul);
+    List<ResultatAprenentatgeGeneral> findAllByCicleFormatiu(CicleFormatiu cicleFormatiu);
 }

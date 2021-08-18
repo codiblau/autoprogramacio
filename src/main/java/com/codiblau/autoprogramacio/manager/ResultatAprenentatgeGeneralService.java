@@ -1,5 +1,6 @@
 package com.codiblau.autoprogramacio.manager;
 
+import com.codiblau.autoprogramacio.model.boe.CicleFormatiu;
 import com.codiblau.autoprogramacio.model.boe.Modul;
 import com.codiblau.autoprogramacio.model.boe.ResultatAprenentatgeCicle;
 import com.codiblau.autoprogramacio.model.boe.ResultatAprenentatgeGeneral;
@@ -16,12 +17,12 @@ public class ResultatAprenentatgeGeneralService {
     @Autowired
     ResultatAprenentatgeGeneralRepository resultatAprenentatgeGeneralRepository;
 
-    public void save(Integer index, String es, String ca, Modul m, Set<ResultatAprenentatgeCicle> resultatsAprenentatgeCicle){
+    public void save(Integer index, String es, String ca, CicleFormatiu cf, Set<ResultatAprenentatgeCicle> resultatsAprenentatgeCicle){
         ResultatAprenentatgeGeneral ra = new ResultatAprenentatgeGeneral();
         ra.setOrdre(index);
         ra.setNomES(es);
         ra.setNomCA(ca);
-        ra.setModul(m);
+        ra.setCicleFormatiu(cf);
         if(resultatsAprenentatgeCicle != null) {
             ra.setResultatsAprenentatgeCicle(resultatsAprenentatgeCicle);
         }
@@ -29,8 +30,8 @@ public class ResultatAprenentatgeGeneralService {
         resultatAprenentatgeGeneralRepository.save(ra);
     }
 
-    public List<ResultatAprenentatgeGeneral> findByModul(Modul m){
-        return resultatAprenentatgeGeneralRepository.findAllByModul(m);
+    public List<ResultatAprenentatgeGeneral> findByModul(CicleFormatiu cf){
+        return resultatAprenentatgeGeneralRepository.findAllByCicleFormatiu(cf);
     }
 
 }

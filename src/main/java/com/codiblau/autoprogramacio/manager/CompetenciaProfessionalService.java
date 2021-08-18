@@ -1,5 +1,6 @@
 package com.codiblau.autoprogramacio.manager;
 
+import com.codiblau.autoprogramacio.model.boe.CicleFormatiu;
 import com.codiblau.autoprogramacio.model.boe.CompetenciaProfessional;
 import com.codiblau.autoprogramacio.model.boe.Modul;
 import com.codiblau.autoprogramacio.model.boe.ResultatAprenentatgeCicle;
@@ -15,18 +16,18 @@ public class CompetenciaProfessionalService {
     CompetenciaProfessionalRepository competenciaProfessionalRepository;
 
 
-    public void save(Integer index, String es, String ca, Modul m){
+    public void save(Integer index, String es, String ca, CicleFormatiu cf){
         CompetenciaProfessional cp = new CompetenciaProfessional();
         cp.setOrdre(index);
         cp.setNomES(es);
         cp.setNomCA(ca);
-        cp.setModul(m);
+        cp.setCicleFormatiu(cf);
 
         competenciaProfessionalRepository.save(cp);
     }
 
-    public List<CompetenciaProfessional> findByModul(Modul m){
-        return competenciaProfessionalRepository.findAllByModul(m);
+    public List<CompetenciaProfessional> findByCicleFormatiu(CicleFormatiu cf){
+        return competenciaProfessionalRepository.findAllByCicleFormatiu(cf);
     }
 
 }

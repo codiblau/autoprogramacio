@@ -1,5 +1,6 @@
 package com.codiblau.autoprogramacio.repository;
 
+import com.codiblau.autoprogramacio.model.boe.CicleFormatiu;
 import com.codiblau.autoprogramacio.model.boe.CompetenciaProfessional;
 import com.codiblau.autoprogramacio.model.boe.Modul;
 import com.codiblau.autoprogramacio.model.boe.ResultatAprenentatgeCicle;
@@ -10,5 +11,5 @@ import java.util.List;
 
 @Repository
 public interface CompetenciaProfessionalRepository extends JpaRepository<CompetenciaProfessional, Long> {
-    List<CompetenciaProfessional> findAllByModul(Modul modul);
+    List<CompetenciaProfessional> findAllByCicleFormatiu(CicleFormatiu cicleFormatiu);
 }

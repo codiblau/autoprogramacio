@@ -25,7 +25,7 @@ public @Data class CompetenciaProfessional {
     private Integer ordre;
 
     @ManyToOne
-    @JoinColumn(name="modul_idmodul", nullable = false)
+    @JoinColumn(name="cicleformatiu_idcicleformatiu", nullable = false)
     @JsonBackReference
-    private Modul modul;
+    private CicleFormatiu cicleFormatiu;
 }

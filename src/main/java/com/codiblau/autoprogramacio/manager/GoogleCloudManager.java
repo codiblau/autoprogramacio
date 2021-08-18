@@ -17,6 +17,8 @@ import java.util.List;
 @Service
 public class GoogleCloudManager {
 
+    @Value("${project.production}")
+    private Boolean inProduction;
 
     @Value("${gc.projectid}")
     private String projectId;
@@ -25,52 +27,61 @@ public class GoogleCloudManager {
     private String keyFile;
 
 
+
     public String translate(String from, String to, String text) throws IOException {
-        System.out.println("From:" + from);
-        System.out.println("To:" + to);
-        System.out.println("Text:" + text);
-        String[] scopes = { "https://www.googleapis.com/auth/cloud-platform" };
-        GoogleCredentials credentials = GoogleCredentials.fromStream(new FileInputStream(this.keyFile))
-                .createScoped(scopes);
+        if(inProduction) {
+            System.out.println("From:" + from);
+            System.out.println("To:" + to);
+            System.out.println("Text:" + text);
+            String[] scopes = {"https://www.googleapis.com/auth/cloud-platform"};
+            GoogleCredentials credentials = GoogleCredentials.fromStream(new FileInputStream(this.keyFile))
+                    .createScoped(scopes);
 
-        // Instantiates a client
-        Translate translate = TranslateOptions.newBuilder().setCredentials(credentials).setProjectId(projectId).build()
-                .getService();
+            // Instantiates a client
+            Translate translate = TranslateOptions.newBuilder().setCredentials(credentials).setProjectId(projectId).build()
+                    .getService();
 
-        // Translates some text into Russian
-        Translation translation = translate.translate(text, Translate.TranslateOption.sourceLanguage(from),
-                Translate.TranslateOption.targetLanguage(to));
+            // Translates some text into Russian
+            Translation translation = translate.translate(text, Translate.TranslateOption.sourceLanguage(from),
+                    Translate.TranslateOption.targetLanguage(to));
 
-        if (translation != null) {
-            return translation.getTranslatedText();
+            if (translation != null) {
+                return translation.getTranslatedText();
+            }
+
+            return null;
+        } else{
+            return to + ": " + text;
         }
-
-        return null;
     }
 
     public String translate(String to, String text) throws IOException {
-        System.out.println("To:" + to);
-        System.out.println("Text:" + text);
-        String[] scopes = { "https://www.googleapis.com/auth/cloud-platform" };
-        GoogleCredentials credentials = GoogleCredentials.fromStream(new FileInputStream(this.keyFile))
-                .createScoped(scopes);
+        if(inProduction) {
+            System.out.println("To:" + to);
+            System.out.println("Text:" + text);
+            String[] scopes = {"https://www.googleapis.com/auth/cloud-platform"};
+            GoogleCredentials credentials = GoogleCredentials.fromStream(new FileInputStream(this.keyFile))
+                    .createScoped(scopes);
 
-        // Instantiates a client
-        Translate translate = TranslateOptions.newBuilder().setCredentials(credentials).setProjectId(projectId).build()
-                .getService();
+            // Instantiates a client
+            Translate translate = TranslateOptions.newBuilder().setCredentials(credentials).setProjectId(projectId).build()
+                    .getService();
 
-        Detection detection = translate.detect(text);
-        String detectedLanguage = detection.getLanguage();
+            Detection detection = translate.detect(text);
+            String detectedLanguage = detection.getLanguage();
 
-        // Translates some text into Russian
-        Translation translation = translate.translate(text, Translate.TranslateOption.sourceLanguage(detectedLanguage),
-                Translate.TranslateOption.targetLanguage(to));
+            // Translates some text into Russian
+            Translation translation = translate.translate(text, Translate.TranslateOption.sourceLanguage(detectedLanguage),
+                    Translate.TranslateOption.targetLanguage(to));
 
-        if (translation != null) {
-            return translation.getTranslatedText();
+            if (translation != null) {
+                return translation.getTranslatedText();
+            }
+
+            return null;
+        } else {
+            return to + ": " + text;
         }
-
-        return null;
     }
 
     public String detectLanguage(String text) throws IOException {

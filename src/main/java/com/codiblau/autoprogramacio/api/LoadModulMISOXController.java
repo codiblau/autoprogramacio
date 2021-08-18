@@ -121,9 +121,9 @@ public class LoadModulMISOXController {
         seccioService.save("Resultats de l’aprenentatge", ordreSeccio++, 1, s3, p2);
 
         List<String> s3_1 = new ArrayList<>();
-        for(ResultatAprenentatgeGeneral raGeneral: resultatAprenentatgeGeneralService.findByModul(m) ){
+        /*for(ResultatAprenentatgeGeneral raGeneral: resultatAprenentatgeGeneralService.findByModul(m) ){
             s3_1.add(raGeneral.getNomES());
-        }
+        }*/
         seccioService.save("Generals del cicle", ordreSeccio++, 2, s3_1, p2);
 
         List<String> s3_2 = new ArrayList<>();
@@ -134,9 +134,9 @@ public class LoadModulMISOXController {
 
         List<String> s4= new ArrayList<>();
         s4.add("El mòdul contribueix a assolir les següents competències professionals, personals i socials:");
-        for(CompetenciaProfessional competencia: competenciaProfessionalService.findByModul(m) ){
+        /*for(CompetenciaProfessional competencia: competenciaProfessionalService.findByModul(m) ){
             s4.add(competencia.getNomES());
-        }
+        }*/
         seccioService.save("Competències professionals, personals i socials", ordreSeccio++, 1, s4, p2);
 
         List<String> s5= new ArrayList<>();
@@ -211,7 +211,7 @@ public class LoadModulMISOXController {
             Set<ResultatAprenentatgeCicle> rac = new HashSet<>();
             //rac.add(resultatAprenentatgeCicleService.findByOrdreAndModul(1,m));
 
-            resultatAprenentatgeGeneralService.save(index, s, s_ca, m, rac);
+            //resultatAprenentatgeGeneralService.save(index, s, s_ca, m, rac);
 
             index++;
         }
@@ -246,7 +246,7 @@ public class LoadModulMISOXController {
         Integer index = 1;
         for (String s : competencies) {
             String s_ca = ""; //googleCloudManager.translate(GOOGLE_ESPANOL, GOOGLE_CATALA, s);
-            competenciaProfessionalService.save(index, s, s_ca, m);
+            //competenciaProfessionalService.save(index, s, s_ca, m);
 
             index++;
         }

@@ -21,13 +21,10 @@ public @Data class Modul {
     @Column(name = "nom", nullable = false, length = 2048)
     private String nom;
 
-    @OneToMany(mappedBy="modul",fetch = FetchType.EAGER)
-    @JsonManagedReference
-    private Set<ResultatAprenentatgeGeneral> resultatsAprenentatgeGeneral = new HashSet<>();
-
-    @OneToMany(mappedBy="modul")
-    @JsonManagedReference
-    private Set<CompetenciaProfessional> competenciesProfessionals = new HashSet<>();
+    @ManyToOne
+    @JoinColumn(name="cicleformatiu_idcicleformatiu", nullable = false)
+    @JsonBackReference
+    private CicleFormatiu cicleFormatiu;
 
     @OneToMany(mappedBy="modul")
     @JsonManagedReference
@@ -40,5 +37,11 @@ public @Data class Modul {
     @OneToMany(mappedBy="modul")
     @JsonBackReference
     private Set<Programacio> programacions = new HashSet<>();
+
+    @ManyToMany
+    private Set<ResultatAprenentatgeGeneral> resultatsAprenentatgeGeneral = new HashSet<>();
+
+    @ManyToMany
+    private Set<CompetenciaProfessional> competenciesProfessionals = new HashSet<>();
 
 }
